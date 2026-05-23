@@ -34,7 +34,8 @@ $posts = $post->getPosts();
 <?php require_once "navbar.php"; ?>
 
 <h2>
-    All Blog Posts
+    <i class="fa-solid fa-fire" style="background: linear-gradient(135deg, #ec4899, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i>
+    Feed
 </h2>
 
 <?php if($posts->rowCount() > 0): ?>
@@ -402,6 +403,11 @@ $posts = $post->getPosts();
 
 <?php endif; ?>
 
+<!-- FLOATING ACTION BUTTON -->
+<a href="create_post.php" class="fab" title="Create Post">
+    <i class="fa-solid fa-plus"></i>
+</a>
+
 <script>
 
 function toggleComments(id) {
@@ -430,8 +436,9 @@ window.onload = function() {
 
     // DARK MODE
     if(localStorage.getItem("darkMode") === "enabled") {
-
         document.body.classList.add("dark-mode");
+        const icon = document.getElementById("darkModeIcon");
+        if(icon) icon.className = "fa-solid fa-sun";
     }
 
     // KEEP COMMENTS OPEN

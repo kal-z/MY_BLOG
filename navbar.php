@@ -50,19 +50,23 @@ if(isset($_SESSION['user_id'])) {
 <div class="navbar">
 
     <a href="dashboard.php" class="nav-link">
-        My Profile
+        <i class="fa-solid fa-user"></i>
+        Profile
     </a>
 
     <a href="posts.php" class="nav-link">
-        Blogs
+        <i class="fa-solid fa-house"></i>
+        Feed
     </a>
 
     <a href="create_post.php" class="nav-link">
-        Create Post
+        <i class="fa-solid fa-plus"></i>
+        Create
     </a>
 
     <a href="my_likes.php" class="nav-link">
-        My Likes
+        <i class="fa-solid fa-heart"></i>
+        Likes
     </a>
 
     <!-- MESSAGE ICON -->
@@ -106,8 +110,8 @@ $unreadData = $unreadStmt->fetch(PDO::FETCH_ASSOC);
 </a>
 
     <!-- DARK MODE -->
-    <button onclick="toggleDarkMode()" id="darkModeBtn">
-     <i class="fa-solid fa-moon"></i>
+    <button onclick="toggleDarkMode()" id="darkModeBtn" title="Toggle Dark Mode">
+        <i class="fa-solid fa-moon" id="darkModeIcon"></i>
     </button>
 <?php
 
@@ -157,6 +161,30 @@ $notifData = $notifStmt->fetch(PDO::FETCH_ASSOC);
     </a>
 
 </div>
+
+<script>
+function toggleDarkMode() {
+    document.body.classList.toggle("dark-mode");
+    const icon = document.getElementById("darkModeIcon");
+    
+    if(document.body.classList.contains("dark-mode")) {
+        localStorage.setItem("darkMode", "enabled");
+        if(icon) icon.className = "fa-solid fa-sun";
+    } else {
+        localStorage.setItem("darkMode", "disabled");
+        if(icon) icon.className = "fa-solid fa-moon";
+    }
+}
+
+// Apply dark mode on page load
+(function() {
+    if(localStorage.getItem("darkMode") === "enabled") {
+        document.body.classList.add("dark-mode");
+        const icon = document.getElementById("darkModeIcon");
+        if(icon) icon.className = "fa-solid fa-sun";
+    }
+})();
+</script>
 
 </body>
 </html>

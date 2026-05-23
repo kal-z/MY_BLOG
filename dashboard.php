@@ -416,24 +416,23 @@ $myPostsStmt->execute();
 <script>
 
 function toggleDarkMode() {
-
     document.body.classList.toggle("dark-mode");
-
+    const icon = document.getElementById("darkModeIcon");
+    
     if(document.body.classList.contains("dark-mode")) {
-
         localStorage.setItem("darkMode", "enabled");
-
+        if(icon) icon.className = "fa-solid fa-sun";
     } else {
-
         localStorage.setItem("darkMode", "disabled");
+        if(icon) icon.className = "fa-solid fa-moon";
     }
 }
 
 window.onload = function() {
-
     if(localStorage.getItem("darkMode") === "enabled") {
-
         document.body.classList.add("dark-mode");
+        const icon = document.getElementById("darkModeIcon");
+        if(icon) icon.className = "fa-solid fa-sun";
     }
 };
 

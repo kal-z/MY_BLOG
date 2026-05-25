@@ -1,23 +1,18 @@
 <?php
-
+require_once "navbar.php";
 class Post {
-
     private $conn;
-
     private $table_name = "posts";
 
     public function __construct($db) {
-
         $this->conn = $db;
     }
 
-    /* CREATE POST */
+    // Create post (NOW WITH IMAGE)
     public function create($title, $content, $image, $user_id) {
 
-        $query = "
-            INSERT INTO posts(title, content, image, user_id)
-            VALUES(:title, :content, :image, :user_id)
-        ";
+        $query = "INSERT INTO posts(title, content, image, user_id)
+                  VALUES(:title, :content, :image, :user_id)";
 
         $stmt = $this->conn->prepare($query);
 
@@ -29,61 +24,50 @@ class Post {
         return $stmt->execute();
     }
 
-    /* GET POSTS */
-    public function getPosts() {
+    // Get all posts (WITH USERNAME + IMAGE)
+   public function getPosts() {
 
-        $query = "
-            SELECT 
-                posts.*,
-                users.username,
-                users.profile_image
-            FROM posts
-            JOIN users
-            ON posts.user_id = users.id
-            ORDER BY posts.created_at DESC
-        ";
+    $query = "
+        SELECT 
+            posts.*,
+            users.username,
+            users.profile_image
+        FROM posts
+        JOIN users
+        ON posts.user_id = users.id
+        ORDER BY posts.created_at DESC
+    ";
 
-        $stmt = $this->conn->prepare($query);
+    $stmt = $this->conn->prepare($query);
 
-        $stmt->execute();
+    $stmt->execute();
 
-        return $stmt;
-    }
-
-    /* DELETE POST */
+    return $stmt;
+}
     public function delete($id) {
 
-        $query = "
-            DELETE FROM posts
-            WHERE id = :id
-        ";
+    $query = "DELETE FROM posts WHERE id = :id";
 
-        $stmt = $this->conn->prepare($query);
+    $stmt = $this->conn->prepare($query);
 
-        $stmt->bindParam(':id', $id);
+    $stmt->bindParam(':id', $id);
 
-        return $stmt->execute();
-    }
-
-    /* UPDATE POST */
-    public function update($id, $title, $content) {
-
-        $query = "
-            UPDATE posts
-            SET
-                title = :title,
-                content = :content
-            WHERE id = :id
-        ";
-
-        $stmt = $this->conn->prepare($query);
-
-        $stmt->bindParam(':title', $title);
-        $stmt->bindParam(':content', $content);
-        $stmt->bindParam(':id', $id);
-
-        return $stmt->execute();
-    }
+    return $stmt->execute();
 }
+public function update($id, $title, $content) {
 
+    $query = "UPDATE posts
+              SET title = :title,
+                  content = :content
+              WHERE id = :id";
+
+    $stmt = $this->conn->prepare($query);
+
+    $stmt->bindParam(':title', $title);
+    $stmt->bindParam(':content', $content);
+    $stmt->bindParam(':id', $id);
+
+    return $stmt->execute();
+}
+}
 ?>

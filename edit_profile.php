@@ -66,7 +66,7 @@ if(isset($_SESSION['profile_image'])) {
 
 <div class="post-card">
 
-    <h2>👤 Edit Profile Picture</h2>
+    <h2>Edit Profile Picture</h2>
 
     <?php if(!empty($_SESSION['profile_image'])): ?>
 <img src="<?= htmlspecialchars($_SESSION['profile_image']); ?>"

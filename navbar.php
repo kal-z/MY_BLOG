@@ -89,26 +89,13 @@ $unreadData = $unreadStmt->fetch(PDO::FETCH_ASSOC);
 
 ?>
 
-<a href="messages.php" class="message-icon">
 
-    <i class="fa-solid fa-envelope"></i>
-
-    <?php if($unreadData['total_unread'] > 0): ?>
-
-        <span class="message-badge">
-
-            <?= $unreadData['total_unread']; ?>
-
-        </span>
-
-    <?php endif; ?>
-
-</a>
 
     <!-- DARK MODE -->
     <button onclick="toggleDarkMode()" id="darkModeBtn">
      <i class="fa-solid fa-moon"></i>
     </button>
+
 <?php
 
 $notifQuery = "
@@ -142,6 +129,22 @@ $notifData = $notifStmt->fetch(PDO::FETCH_ASSOC);
 
     <?php endif; ?>
 
+</a>
+<a href="messages.php" class="message-icon">
+
+    <i class="fa-solid fa-envelope"></i> 
+
+    <?php if($unreadData['total_unread'] > 0): ?>
+
+        <span class="message-badge">
+
+            <?= $unreadData['total_unread']; ?>
+
+        </span>
+
+    <?php endif; ?>
+
+ 
 </a>
     <!-- USER -->
     <div class="welcome-text">

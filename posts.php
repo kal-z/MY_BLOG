@@ -60,14 +60,22 @@ $posts = $post->getPosts();
         >
 
     <?php else: ?>
-
+    
         <img 
             src="uploads/default.png"
-            class="profile-pic"
-        >
-
+            class="profile-pic">
+            
+        
     <?php endif; ?>
 
+
+
+
+
+
+
+
+    
     <div>
 
         <small>
@@ -508,5 +516,32 @@ function closeDeleteModal() {
     </div>
 
 </div>
+<script>
+
+/* DARK MODE */
+function toggleDarkMode() {
+
+    document.body.classList.toggle("dark-mode");
+
+    if(document.body.classList.contains("dark-mode")) {
+
+        localStorage.setItem("darkMode", "enabled");
+
+    } else {
+
+        localStorage.setItem("darkMode", "disabled");
+    }
+}
+
+/* LOAD MODE */
+window.onload = function() {
+
+    if(localStorage.getItem("darkMode") === "enabled") {
+
+        document.body.classList.add("dark-mode");
+    }
+};
+
+</script>
 </body>
 </html>

@@ -485,9 +485,7 @@ function closeDeleteModal() {
         </h3>
 
         <p>
-            This will permanently remove the post,
-            uploaded images/videos, likes, and comments
-            from the database.
+            Are you sure you want to delete this post? This action cannot be undone.
         </p>
 
         <div class="delete-modal-actions">
